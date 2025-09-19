@@ -3,14 +3,14 @@
    ========================================================================== */
 
 .site-footer {
-  background: rgba(26, 32, 44, 0.9);
+  background: var(--color-background-secondary);
   border-top: var(--border-primary);
   padding: var(--space-sm) 0;
   margin-top: var(--space-sm);
 }
 
 .footer-left p {
-  color: var(--color-white-transparent-70);
+  color: var(--color-text-muted);
   font-size: 0.9rem;
   margin: 0;
 }
@@ -29,7 +29,7 @@
 }
 
 .footer-social-link {
-  color: var(--color-white-transparent-70);
+  color: var(--color-text-muted);
   text-decoration: none;
   font-size: 1.2rem;
   transition: color var(--transition-fast);

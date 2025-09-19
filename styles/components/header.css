@@ -68,6 +68,13 @@
   color: var(--color-primary-light);
 }
 
+/* Navigation button styling - constrain size on all screens */
+.nav-links .cta-button {
+  padding: var(--space-xs) var(--space-md);
+  font-size: 0.9rem;
+  /* Override the clamp sizing to keep consistent size */
+}
+
 .header-cta-button {
   padding: var(--space-xs) var(--space-md);
   font-size: 0.9rem;
