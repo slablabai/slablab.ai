@@ -285,20 +285,36 @@ function handleFormSubmit(event) {
     submitButton.textContent = 'Sending...';
     submitButton.disabled = true;
     
-    // Simulate form submission (replace with actual API call)
-    setTimeout(() => {
-        console.log('Form data:', data);
-        
-        // Show success message
-        showSuccessMessage();
-        
-        // Reset form
-        form.reset();
-        
+    // Submit to Formspree
+    fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) {
+            // Show success message
+            showSuccessMessage();
+
+            // Reset form
+            form.reset();
+        } else {
+            response.json().then(data => {
+                if (Object.hasOwnProperty.call(data, 'errors')) {
+                    showErrorMessage(data["errors"].map(error => error["message"]).join(", "));
+                } else {
+                    showErrorMessage("Oops! There was a problem submitting your form");
+                }
+            });
+        }
+    }).catch(error => {
+        showErrorMessage("Oops! There was a problem submitting your form");
+    }).finally(() => {
         // Reset button
         submitButton.textContent = originalText;
         submitButton.disabled = false;
-    }, 1000);
+    });
 }
 
 function showSuccessMessage() {
@@ -336,6 +352,47 @@ function showSuccessMessage() {
         notification.style.animation = 'slideOutRight 0.3s ease-in';
         setTimeout(() => {
             document.body.removeChild(notification);
+        }, 300);
+    }, 5000);
+}
+
+function showErrorMessage(message) {
+    // Create error notification
+    const notification = document.createElement('div');
+    notification.className = 'error-notification';
+
+    // Create inner div with safe DOM methods
+    const innerDiv = document.createElement('div');
+    innerDiv.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #dc2626;
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: var(--border-radius-sm);
+        box-shadow: var(--shadow-primary);
+        z-index: 10000;
+        animation: slideInRight 0.3s ease-out;
+    `;
+
+    // Create text content safely
+    const strongElement = document.createElement('strong');
+    strongElement.textContent = 'Error: ';
+    innerDiv.appendChild(strongElement);
+    innerDiv.appendChild(document.createTextNode(message));
+
+    notification.appendChild(innerDiv);
+
+    document.body.appendChild(notification);
+
+    // Remove after 5 seconds
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease-in';
+        setTimeout(() => {
+            if (document.body.contains(notification)) {
+                document.body.removeChild(notification);
+            }
         }, 300);
     }, 5000);
 }
