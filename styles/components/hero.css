@@ -1,0 +1,194 @@
+/* ==========================================================================
+   Hero Component
+   ========================================================================== */
+
+.hero {
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-2xl) 0;
+}
+
+.hero .hero-grid h1 {
+  text-align: end;
+  margin-inline-end: var(--space-lg);
+  margin-bottom: var(--space-xs);
+  font-size: clamp(2rem, 4vw + 1.5rem, 5.5rem);
+}
+
+.hero-tagline {
+  font-size: clamp(0.9rem, 1.8vw + 0.6rem, 1.8rem);
+  color: var(--color-primary-light);
+  font-weight: var(--font-weight-semibold);
+  text-transform: lowercase;
+  letter-spacing: 1px;
+  margin-bottom: var(--space-lg);
+  margin-top: -1.7rem;
+  text-align: end;
+  margin-inline-end: var(--space-lg);
+}
+
+.hero-intro {
+  font-size: clamp(1.4rem, 2vw + 0.8rem, 2rem);
+  color: var(--color-white-transparent-90);
+  line-height: var(--line-height-base);
+  margin-bottom: var(--space-lg);
+}
+
+/* Contact page form intro note */
+.form-intro-note {
+  font-size: 1.1rem;
+  color: var(--color-primary-light);
+  background: var(--color-white-transparent-05);
+  border: 1px solid rgba(64, 224, 208, 0.3);
+  border-radius: var(--border-radius-md);
+  padding: var(--space-md);
+  margin-top: var(--space-lg);
+  line-height: var(--line-height-relaxed);
+  font-style: italic;
+}
+
+.hero-buttons {
+  margin-top: var(--space-lg);
+  text-align: end;
+  margin-inline-end: var(--space-lg);
+}
+
+.cta-button-spacing {
+  margin-inline-end: var(--space-sm);
+}
+
+/* Scrolling text animation (Critical Moments style) */
+.hero-intro {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.hero-intro p {
+  margin: 0;
+}
+
+.cycling-text-container {
+  display: inline-block;
+  overflow: hidden;
+  height: 1.8em;
+  vertical-align: top;
+  position: relative;
+  transform: translateY(-2.1em);
+  margin-left: 2.5rem
+}
+
+.cycling-text-scroll {
+  animation: scroll-text 25s linear infinite;
+  will-change: transform;
+}
+
+.cycling-word {
+  height: 1.8em;
+  line-height: 1.8em;
+  display: flex;
+  align-items: center;
+  background: var(--gradient-text);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--color-primary-light); /* fallback */
+  font-weight: var(--font-weight-bold);
+  font-size: 1.2em;
+  white-space: nowrap;
+}
+
+/* Keyframes for smooth scrolling with 5 second pauses (1.8em line height) */
+@keyframes scroll-text {
+  0% { transform: translateY(0); }
+  18.8% { transform: translateY(0); }
+  20% { transform: translateY(-2.15em); }
+  38.8% { transform: translateY(-2.15em); }
+  40% { transform: translateY(-4.3em); }
+  58.8% { transform: translateY(-4.3em); }
+  60% { transform: translateY(-6.45em); }
+  78.8% { transform: translateY(-6.45em); }
+  80% { transform: translateY(-8.6em); }
+  98.8% { transform: translateY(-8.6em); }
+  100% { transform: translateY(-10.75em); }
+}
+
+/* Pause animation on hover */
+.cycling-text-container:hover .cycling-text-scroll {
+  animation-play-state: paused;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .cycling-text-scroll {
+    animation: none;
+  }
+  
+  .cycling-word:not(:first-child) {
+    display: none;
+  }
+}
+
+
+/* Intermediate screen sizes for better scaling control */
+@media (max-width: 1200px) {
+  .hero .hero-grid h1 {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    white-space: nowrap;
+  }
+  
+  .hero-tagline {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    white-space: nowrap;
+  }
+  
+  .hero-intro {
+    font-size: clamp(1.2rem, 2.5vw + 0.6rem, 1.8rem);
+  }
+  
+  .hero-buttons {
+    white-space: nowrap;
+  }
+  
+  .hero-buttons .cta-button {
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    padding: clamp(0.5rem, 2vw, 0.8rem) clamp(0.8rem, 3.5vw, 1.8rem);
+  }
+}
+
+/* Mobile hero styles */
+@media (max-width: 768px) {
+  .hero .hero-grid h1 {
+    text-align: end;
+    margin-inline-end: var(--space-sm);
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    white-space: normal;
+  }
+  
+  .hero-tagline {
+    text-align: end;
+    margin-inline-end: var(--space-sm);
+    font-size: clamp(0.9rem, 3vw, 1.2rem);
+    margin-top: -var(--space-sm);
+    white-space: normal;
+  }
+  
+  .hero-intro {
+    font-size: clamp(1.1rem, 4vw, 1.4rem);
+  }
+  
+  .hero-buttons {
+    text-align: end;
+    margin-inline-end: var(--space-sm);
+    white-space: normal;
+  }
+  
+  .hero-buttons .cta-button {
+    font-size: clamp(0.8rem, 3vw, 1rem);
+    padding: clamp(0.6rem, 2vw, 0.8rem) clamp(1rem, 4vw, 2rem);
+  }
+}

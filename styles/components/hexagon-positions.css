@@ -1,0 +1,61 @@
+/* ==========================================================================
+   Hexagon Positioning Classes
+   Extract inline styles for better maintainability
+   ========================================================================== */
+
+/* Back layer hexagons */
+.hexagon-back-1 { top: 10vh; left: 15%; }
+.hexagon-back-2 { top: 25vh; left: 70%; animation-delay: -3s; }
+.hexagon-back-3 { top: 40vh; left: 20%; animation-delay: -6s; }
+.hexagon-back-4 { top: 60vh; left: 80%; animation-delay: -9s; }
+.hexagon-back-5 { top: 75vh; left: 40%; animation-delay: -12s; }
+.hexagon-back-6 { top: 90vh; left: 10%; animation-delay: -15s; }
+.hexagon-back-7 { top: 110vh; left: 60%; animation-delay: -18s; }
+.hexagon-back-8 { top: 140vh; left: 30%; animation-delay: -21s; }
+.hexagon-back-9 { top: 160vh; left: 75%; animation-delay: -24s; }
+.hexagon-back-10 { top: 180vh; left: 25%; animation-delay: -27s; }
+
+/* Mid layer hexagons */
+.hexagon-mid-1 { top: 5vh; left: 50%; animation-delay: -2s; }
+.hexagon-mid-2 { top: 20vh; left: 85%; animation-delay: -5s; }
+.hexagon-mid-3 { top: 35vh; left: 5%; animation-delay: -8s; }
+.hexagon-mid-4 { top: 55vh; left: 65%; animation-delay: -11s; }
+.hexagon-mid-5 { top: 80vh; left: 25%; animation-delay: -14s; }
+.hexagon-mid-6 { top: 100vh; left: 75%; animation-delay: -17s; }
+.hexagon-mid-7 { top: 130vh; left: 45%; animation-delay: -20s; }
+.hexagon-mid-8 { top: 150vh; left: 15%; animation-delay: -23s; }
+.hexagon-mid-9 { top: 170vh; left: 85%; animation-delay: -26s; }
+
+/* Front layer hexagons */
+.hexagon-front-1 { top: 15vh; left: 30%; animation-delay: -1s; }
+.hexagon-front-2 { top: 30vh; left: 90%; animation-delay: -4s; }
+.hexagon-front-3 { top: 50vh; left: 10%; animation-delay: -7s; }
+.hexagon-front-4 { top: 70vh; left: 55%; animation-delay: -10s; }
+.hexagon-front-5 { top: 95vh; left: 80%; animation-delay: -13s; }
+.hexagon-front-6 { top: 110vh; left: 35%; animation-delay: -16s; }
+.hexagon-front-7 { top: 135vh; left: 70%; animation-delay: -19s; }
+.hexagon-front-8 { top: 155vh; left: 20%; animation-delay: -22s; }
+
+/* Mobile adjustments for hexagon positions */
+@media (max-width: 768px) {
+  /* Reduce hexagon count on mobile for performance */
+  .hexagon-back-8,
+  .hexagon-back-9,
+  .hexagon-back-10,
+  .hexagon-mid-7,
+  .hexagon-mid-8,
+  .hexagon-mid-9,
+  .hexagon-front-7,
+  .hexagon-front-8 {
+    display: none;
+  }
+  
+  /* Adjust remaining positions for mobile */
+  .hexagon-back-1 { left: 10%; }
+  .hexagon-back-2 { left: 80%; }
+  .hexagon-back-3 { left: 15%; }
+  .hexagon-back-4 { left: 85%; }
+  .hexagon-back-5 { left: 35%; }
+  .hexagon-back-6 { left: 5%; }
+  .hexagon-back-7 { left: 65%; }
+}

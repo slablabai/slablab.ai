@@ -1,0 +1,110 @@
+/* ==========================================================================
+   Theme Toggle Component
+   ========================================================================== */
+
+.theme-toggle-container {
+  position: absolute;
+  top: 80px;
+  right: var(--space-md);
+  z-index: var(--z-ui);
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-xs) var(--space-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.theme-toggle:hover {
+  background: var(--color-surface-hover);
+  border-color: var(--color-primary-light);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.theme-toggle:focus {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.theme-label {
+  color: var(--color-white);
+  transition: color var(--transition-fast);
+  user-select: none;
+  font-size: inherit;
+}
+
+.theme-switch {
+  position: relative;
+  width: 32px;
+  height: 16px;
+  background: var(--color-border);
+  border-radius: 8px;
+  transition: background-color var(--transition-fast);
+}
+
+.theme-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  background: var(--color-white);
+  border-radius: 50%;
+  transition: transform var(--transition-fast);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Active states */
+[data-theme="light"] .theme-label:first-child {
+  color: var(--color-primary);
+}
+
+[data-theme="dark"] .theme-label:last-child {
+  color: var(--color-primary);
+}
+
+[data-theme="dark"] .theme-switch {
+  background: var(--color-primary-light);
+}
+
+[data-theme="dark"] .theme-switch::after {
+  transform: translateX(16px);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .theme-toggle-container {
+    top: 70px;
+    right: var(--space-sm);
+  }
+  
+  .theme-toggle {
+    padding: var(--space-xs);
+    font-size: 0.8rem;
+  }
+  
+  .theme-switch {
+    width: 28px;
+    height: 14px;
+  }
+  
+  .theme-switch::after {
+    width: 10px;
+    height: 10px;
+  }
+  
+  [data-theme="dark"] .theme-switch::after {
+    transform: translateX(14px);
+  }
+}

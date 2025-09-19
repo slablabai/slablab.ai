@@ -1,0 +1,121 @@
+/* ==========================================================================
+   Typography Base Styles
+   ========================================================================== */
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--line-height-tight);
+  margin: 0;
+}
+
+h1 {
+  font-weight: var(--font-weight-black);
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  /* Font size removed to allow component-specific sizing */
+}
+
+h2 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+h3 {
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-weight: var(--font-weight-normal);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+h4 {
+  font-size: 1.8rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary-light);
+}
+
+h5 {
+  font-size: 1.5rem;
+  color: var(--color-primary-light);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Body text */
+p {
+  margin-bottom: var(--space-sm);
+  line-height: var(--line-height-relaxed);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+/* Links */
+a {
+  color: var(--color-white-transparent-80);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary-light);
+}
+
+/* Lists */
+ul, ol {
+  margin-bottom: var(--space-sm);
+  padding-inline-start: var(--space-lg);
+}
+
+li {
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-xs);
+}
+
+/* Text utilities */
+.text-large {
+  font-size: 1.3rem;
+  color: var(--color-white-transparent-80);
+  line-height: var(--line-height-relaxed);
+}
+
+.text-medium {
+  font-size: 1.2rem;
+  line-height: var(--line-height-relaxed);
+}
+
+.text-small {
+  font-size: 0.9rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.font-bold {
+  font-weight: var(--font-weight-bold);
+}
+
+.font-semibold {
+  font-weight: var(--font-weight-semibold);
+}
+
+.font-medium {
+  font-weight: var(--font-weight-medium);
+}

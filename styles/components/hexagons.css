@@ -1,0 +1,255 @@
+/* ==========================================================================
+   Hexagon Background Components
+   ========================================================================== */
+
+/* Hexagon background layers with parallax positioning */
+.hexagon-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Layer depth using different z-index and parallax speeds */
+.layer-back {
+  z-index: var(--z-hexagon-back);
+  /* Slowest parallax - moves at 0.2x scroll speed */
+}
+
+.layer-mid {
+  z-index: var(--z-hexagon-mid);
+  /* Medium parallax - moves at 0.5x scroll speed */
+}
+
+.layer-front {
+  z-index: var(--z-hexagon-front);
+  /* Fastest parallax - moves at 0.8x scroll speed */
+}
+
+/* Hexagon styles with precise math at 100px base, scaled down */
+.hexagon {
+  position: absolute;
+  width: var(--hexagon-base-size);
+  height: calc(var(--hexagon-base-size) * var(--hexagon-height-ratio));
+  background: rgba(194, 65, 12, 0.15);
+  animation: drift-medium var(--animation-drift-fast) linear infinite;
+  transform: scale(0.3);
+  transform-origin: center;
+}
+
+/* Light theme hexagon adjustments */
+[data-theme="light"] .hexagon {
+  background: rgba(194, 65, 12, 0.08);
+}
+
+[data-theme="light"] .hexagon:before {
+  border-bottom: calc(var(--hexagon-base-size) * var(--hexagon-triangle-ratio)) solid rgba(194, 65, 12, 0.08);
+}
+
+[data-theme="light"] .hexagon:after {
+  border-top: calc(var(--hexagon-base-size) * var(--hexagon-triangle-ratio)) solid rgba(194, 65, 12, 0.08);
+}
+
+.hexagon:before,
+.hexagon:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  border-left: calc(var(--hexagon-base-size) / 2) solid transparent;
+  border-right: calc(var(--hexagon-base-size) / 2) solid transparent;
+}
+
+.hexagon:before {
+  bottom: 100%;
+  border-bottom: calc(var(--hexagon-base-size) * var(--hexagon-triangle-ratio)) solid rgba(194, 65, 12, 0.15);
+}
+
+.hexagon:after {
+  top: 100%;
+  border-top: calc(var(--hexagon-base-size) * var(--hexagon-triangle-ratio)) solid rgba(194, 65, 12, 0.15);
+}
+
+/* Hexagon size variants */
+.hexagon.tiny {
+  animation: drift-tiny var(--animation-drift-fast) linear infinite;
+  background: rgba(194, 65, 12, 0.08);
+}
+
+.hexagon.tiny:before { 
+  border-bottom: calc(var(--hexagon-base-size) * var(--hexagon-triangle-ratio)) solid rgba(194, 65, 12, 0.08); 
+}
+.hexagon.tiny:after { 
+  border-top: calc(var(--hexagon-base-size) * var(--hexagon-triangle-ratio)) solid rgba(194, 65, 12, 0.08); 
+}
+
+.hexagon.small {
+  animation: drift-small var(--animation-drift-fast) linear infinite;
+  background: rgba(194, 65, 12, 0.10);
+}
+
+.hexagon.small:before { 
+  border-bottom: calc(var(--hexagon-base-size) * var(--hexagon-triangle-ratio)) solid rgba(194, 65, 12, 0.10); 
+}
+.hexagon.small:after { 
+  border-top: calc(var(--hexagon-base-size) * var(--hexagon-triangle-ratio)) solid rgba(194, 65, 12, 0.10); 
+}
+
+.hexagon.medium {
+  animation: drift-medium var(--animation-drift-fast) linear infinite;
+  background: rgba(194, 65, 12, 0.15);
+}
+
+.hexagon.large {
+  animation: drift-large var(--animation-drift-fast) linear infinite;
+  background: rgba(253, 127, 40, 0.20);
+}
+
+.hexagon.large:before { 
+  border-bottom: calc(var(--hexagon-base-size) * var(--hexagon-triangle-ratio)) solid rgba(253, 127, 40, 0.20); 
+}
+.hexagon.large:after { 
+  border-top: calc(var(--hexagon-base-size) * var(--hexagon-triangle-ratio)) solid rgba(253, 127, 40, 0.20); 
+}
+
+.hexagon.huge {
+  animation: drift-huge var(--animation-drift-fast) linear infinite;
+  background: rgba(253, 127, 40, 0.25);
+}
+
+.hexagon.huge:before { 
+  border-bottom: calc(var(--hexagon-base-size) * var(--hexagon-triangle-ratio)) solid rgba(253, 127, 40, 0.25); 
+}
+.hexagon.huge:after { 
+  border-top: calc(var(--hexagon-base-size) * var(--hexagon-triangle-ratio)) solid rgba(253, 127, 40, 0.25); 
+}
+
+/* Different layer animation speeds */
+.layer-back .hexagon {
+  animation-duration: var(--animation-drift-slow);
+}
+
+.layer-mid .hexagon {
+  animation-duration: var(--animation-drift-medium);
+}
+
+.layer-front .hexagon {
+  animation-duration: var(--animation-drift-fastest);
+}
+
+/* Optimized floating animations with proper scaling */
+@keyframes drift-tiny {
+  0% { transform: scale(0.25) translateY(0) rotate(0deg); }
+  25% { transform: scale(0.25) translateY(-10px) rotate(90deg); }
+  50% { transform: scale(0.25) translateY(0) rotate(180deg); }
+  75% { transform: scale(0.25) translateY(10px) rotate(270deg); }
+  100% { transform: scale(0.25) translateY(0) rotate(360deg); }
+}
+
+@keyframes drift-small {
+  0% { transform: scale(0.33) translateY(0) rotate(0deg); }
+  25% { transform: scale(0.33) translateY(-10px) rotate(90deg); }
+  50% { transform: scale(0.33) translateY(0) rotate(180deg); }
+  75% { transform: scale(0.33) translateY(10px) rotate(270deg); }
+  100% { transform: scale(0.33) translateY(0) rotate(360deg); }
+}
+
+@keyframes drift-medium {
+  0% { transform: scale(0.5) translateY(0) rotate(0deg); }
+  25% { transform: scale(0.5) translateY(-10px) rotate(90deg); }
+  50% { transform: scale(0.5) translateY(0) rotate(180deg); }
+  75% { transform: scale(0.5) translateY(10px) rotate(270deg); }
+  100% { transform: scale(0.5) translateY(0) rotate(360deg); }
+}
+
+@keyframes drift-large {
+  0% { transform: scale(0.75) translateY(0) rotate(0deg); }
+  25% { transform: scale(0.75) translateY(-10px) rotate(90deg); }
+  50% { transform: scale(0.75) translateY(0) rotate(180deg); }
+  75% { transform: scale(0.75) translateY(10px) rotate(270deg); }
+  100% { transform: scale(0.75) translateY(0) rotate(360deg); }
+}
+
+@keyframes drift-huge {
+  0% { transform: scale(1) translateY(0) rotate(0deg); }
+  25% { transform: scale(1) translateY(-10px) rotate(90deg); }
+  50% { transform: scale(1) translateY(0) rotate(180deg); }
+  75% { transform: scale(1) translateY(10px) rotate(270deg); }
+  100% { transform: scale(1) translateY(0) rotate(360deg); }
+}
+
+/* Light theme hexagon size variants with reduced opacity */
+[data-theme="light"] .hexagon.tiny {
+  background: rgba(194, 65, 12, 0.04);
+}
+
+[data-theme="light"] .hexagon.tiny:before { 
+  border-bottom: calc(var(--hexagon-base-size) * var(--hexagon-triangle-ratio)) solid rgba(194, 65, 12, 0.04); 
+}
+[data-theme="light"] .hexagon.tiny:after { 
+  border-top: calc(var(--hexagon-base-size) * var(--hexagon-triangle-ratio)) solid rgba(194, 65, 12, 0.04); 
+}
+
+[data-theme="light"] .hexagon.small {
+  background: rgba(194, 65, 12, 0.05);
+}
+
+[data-theme="light"] .hexagon.small:before { 
+  border-bottom: calc(var(--hexagon-base-size) * var(--hexagon-triangle-ratio)) solid rgba(194, 65, 12, 0.05); 
+}
+[data-theme="light"] .hexagon.small:after { 
+  border-top: calc(var(--hexagon-base-size) * var(--hexagon-triangle-ratio)) solid rgba(194, 65, 12, 0.05); 
+}
+
+[data-theme="light"] .hexagon.medium {
+  background: rgba(194, 65, 12, 0.06);
+}
+
+[data-theme="light"] .hexagon.medium:before { 
+  border-bottom: calc(var(--hexagon-base-size) * var(--hexagon-triangle-ratio)) solid rgba(194, 65, 12, 0.06); 
+}
+[data-theme="light"] .hexagon.medium:after { 
+  border-top: calc(var(--hexagon-base-size) * var(--hexagon-triangle-ratio)) solid rgba(194, 65, 12, 0.06); 
+}
+
+[data-theme="light"] .hexagon.large {
+  background: rgba(253, 127, 40, 0.08);
+}
+
+[data-theme="light"] .hexagon.large:before { 
+  border-bottom: calc(var(--hexagon-base-size) * var(--hexagon-triangle-ratio)) solid rgba(253, 127, 40, 0.08); 
+}
+[data-theme="light"] .hexagon.large:after { 
+  border-top: calc(var(--hexagon-base-size) * var(--hexagon-triangle-ratio)) solid rgba(253, 127, 40, 0.08); 
+}
+
+[data-theme="light"] .hexagon.huge {
+  background: rgba(253, 127, 40, 0.10);
+}
+
+[data-theme="light"] .hexagon.huge:before { 
+  border-bottom: calc(var(--hexagon-base-size) * var(--hexagon-triangle-ratio)) solid rgba(253, 127, 40, 0.10); 
+}
+[data-theme="light"] .hexagon.huge:after { 
+  border-top: calc(var(--hexagon-base-size) * var(--hexagon-triangle-ratio)) solid rgba(253, 127, 40, 0.10); 
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+  .hexagon {
+    animation: none;
+  }
+}
+
+/* Reduce animation complexity on smaller screens */
+@media (max-width: 768px) {
+  .hexagon {
+    animation-duration: calc(var(--animation-drift-fast) * 2);
+  }
+  
+  .layer-back .hexagon {
+    animation-duration: calc(var(--animation-drift-slow) * 1.5);
+  }
+}
