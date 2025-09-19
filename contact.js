@@ -254,148 +254,38 @@ function clearFieldError(event) {
 }
 
 function handleFormSubmit(event) {
-    event.preventDefault();
-    
     const form = event.target;
     const formData = new FormData(form);
     const data = Utils.formatFormData(formData);
-    
+
     // Validate all fields
     const requiredFields = form.querySelectorAll('[required]');
     let isValid = true;
-    
+
     requiredFields.forEach(field => {
         if (!validateField({ target: field })) {
             isValid = false;
         }
     });
-    
+
     if (!isValid) {
-        // Scroll to first error
+        // Prevent submission and scroll to first error
+        event.preventDefault();
         const firstError = form.querySelector('.error');
         if (firstError) {
             Utils.smoothScrollTo(firstError, 100);
         }
         return;
     }
-    
+
     // Show loading state
     const submitButton = form.querySelector('[type="submit"]');
-    const originalText = submitButton.textContent;
     submitButton.textContent = 'Sending...';
     submitButton.disabled = true;
-    
-    // Submit to Formspree
-    fetch(form.action, {
-        method: form.method,
-        body: formData,
-        headers: {
-            'Accept': 'application/json'
-        }
-    }).then(response => {
-        if (response.ok) {
-            // Show success message
-            showSuccessMessage();
 
-            // Reset form
-            form.reset();
-        } else {
-            response.json().then(data => {
-                if (Object.hasOwnProperty.call(data, 'errors')) {
-                    showErrorMessage(data["errors"].map(error => error["message"]).join(", "));
-                } else {
-                    showErrorMessage("Oops! There was a problem submitting your form");
-                }
-            });
-        }
-    }).catch(error => {
-        showErrorMessage("Oops! There was a problem submitting your form");
-    }).finally(() => {
-        // Reset button
-        submitButton.textContent = originalText;
-        submitButton.disabled = false;
-    });
+    // Let the form submit normally - Formspree will handle the redirect to thank-you page
 }
 
-function showSuccessMessage() {
-    // Create success notification
-    const notification = document.createElement('div');
-    notification.className = 'success-notification';
-    
-    // Create inner div with safe DOM methods
-    const innerDiv = document.createElement('div');
-    innerDiv.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: var(--gradient-primary);
-        color: white;
-        padding: 1rem 1.5rem;
-        border-radius: var(--border-radius-sm);
-        box-shadow: var(--shadow-primary);
-        z-index: 10000;
-        animation: slideInRight 0.3s ease-out;
-    `;
-    
-    // Create text content safely
-    const strongElement = document.createElement('strong');
-    strongElement.textContent = 'Thank you!';
-    innerDiv.appendChild(strongElement);
-    innerDiv.appendChild(document.createTextNode(' We\'ll be in touch within 24 hours.'));
-    
-    notification.appendChild(innerDiv);
-    
-    document.body.appendChild(notification);
-    
-    // Remove after 5 seconds
-    setTimeout(() => {
-        notification.style.animation = 'slideOutRight 0.3s ease-in';
-        setTimeout(() => {
-            document.body.removeChild(notification);
-        }, 300);
-    }, 5000);
-}
-
-function showErrorMessage(message) {
-    // Create error notification
-    const notification = document.createElement('div');
-    notification.className = 'error-notification';
-
-    // Create inner div with safe DOM methods
-    const innerDiv = document.createElement('div');
-    innerDiv.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: #dc2626;
-        color: white;
-        padding: 1rem 1.5rem;
-        border-radius: var(--border-radius-sm);
-        box-shadow: var(--shadow-primary);
-        z-index: 10000;
-        animation: slideInRight 0.3s ease-out;
-    `;
-
-    // Create text content safely
-    const strongElement = document.createElement('strong');
-    strongElement.textContent = 'Error: ';
-    innerDiv.appendChild(strongElement);
-    innerDiv.appendChild(document.createTextNode(message));
-
-    notification.appendChild(innerDiv);
-
-    document.body.appendChild(notification);
-
-    // Remove after 5 seconds
-    setTimeout(() => {
-        notification.style.animation = 'slideOutRight 0.3s ease-in';
-        setTimeout(() => {
-            if (document.body.contains(notification)) {
-                document.body.removeChild(notification);
-            }
-        }, 300);
-    }, 5000);
-}
 
 // Initialize application
 function initApp() {
